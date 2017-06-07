@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div *ngIf="hero">
+      <h2>{{hero.name}} 的详细信息：</h2>
+      <div><label>英雄的id:</label>{{hero.id}}</div>
+      <div><label>英雄的name:</label>
+        <input [(ngModel)]="hero.name" placeholder="name"/></div>
+        <button (click)="goBack()">Back</button>
+    </div>
+</body>
+</html>

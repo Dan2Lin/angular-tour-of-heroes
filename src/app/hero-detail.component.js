@@ -8,14 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-/**
- * Created by Administrator on 2017/6/6.
- */
+require("rxjs/add/operator/switchMap");
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var common_1 = require("@angular/common");
 var hero_1 = require("./hero");
+var hero_service_1 = require("./hero.service");
 var HeroDetailComponent = (function () {
-    function HeroDetailComponent() {
+    function HeroDetailComponent(location, route, heroService) {
+        this.location = location;
+        this.route = route;
+        this.heroService = heroService;
     }
+    HeroDetailComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params
+            .switchMap(function (params) { return _this.heroService.getHero(+params['id']); })
+            .subscribe(function (hero) { return _this.hero = hero; });
+    };
+    HeroDetailComponent.prototype.goBack = function () {
+        this.location.back();
+    };
     return HeroDetailComponent;
 }());
 __decorate([
@@ -25,8 +38,11 @@ __decorate([
 HeroDetailComponent = __decorate([
     core_1.Component({
         selector: "hero-detail",
-        template: "\n    <div *ngIf=\"hero\">\n        <h2>{{hero.name}} \u7684\u8BE6\u7EC6\u4FE1\u606F\uFF1A</h2>\n        <div><label for=\"\">\u82F1\u96C4\u7684id:</label>{{hero.id}}</div>\n        <div><label for=\"\">\u82F1\u96C4\u7684name:</label>\n        <input [(ngModel)]=\"hero.name\" placeholder=\"name\"/></div>\n    </div>\n  "
-    })
+        templateUrl: "./hero-detail.component.html"
+    }),
+    __metadata("design:paramtypes", [common_1.Location,
+        router_1.ActivatedRoute,
+        hero_service_1.HeroService])
 ], HeroDetailComponent);
 exports.HeroDetailComponent = HeroDetailComponent;
 //# sourceMappingURL=hero-detail.component.js.map

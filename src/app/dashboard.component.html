@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>仪表盘</title>
+</head>
+<body>
+    <h3>明星英雄</h3>
+    <div class="grid grid-pad">
+       <a *ngFor="let hero of heroes" [routerLink]="['/detail',hero.id]" class="col-l-4">
+            <div class="module hero">
+                {{hero.name}}
+            </div>
+       </a>
+    </div>
+</body>
+</html>
