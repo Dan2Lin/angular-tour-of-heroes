@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+     <div id="search-component">
+         <h4>Search</h4>
+         <input #searchBox id="search-box" (keyup)="search(searchBox.value)"/>
+         <div>
+             <div *ngFor="let hero of heroes | async" (click)="gotoDetail(hero)" class="search-result">
+                 {{hero.name}}
+             </div>
+         </div>
+     </div>
+</body>
+</html>
